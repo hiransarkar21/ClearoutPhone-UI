@@ -45,6 +45,7 @@ class ClearoutPhone(QWidget):
     def window_configurations(self):
         self.setFixedWidth(int(self.clearout_phone_window_width))
         self.setFixedHeight(int(self.clearout_phone_window_height))
+        self.setWindowIcon(QIcon("assets//official_icon.ico"))
         self.setWindowTitle("Clearout Phone")
 
     def user_interface(self):

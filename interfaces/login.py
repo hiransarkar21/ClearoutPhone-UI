@@ -33,6 +33,7 @@ class LoginWindow(QWidget):
 
     def window_configurations(self):
         self.setFixedSize(int(self.login_screen_width), int(self.login_screen_height))
+        self.setWindowIcon(QIcon("assets//official_icon.ico"))
         self.setWindowTitle("Login into - ClearOut Phone ")
 
     def user_interface(self):
