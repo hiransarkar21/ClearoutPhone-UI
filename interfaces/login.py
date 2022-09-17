@@ -114,7 +114,7 @@ class LoginWindow(QWidget):
     def open_clearout_phone_user_interface(self):
         from interfaces import clearout_phone
 
-        self.clearout_phone_window = clearout_phone.ClearoutPhoneWindow()
+        self.clearout_phone_window = clearout_phone.ClearoutPhone()
         self.clearout_phone_window.show()
         self.close()
 
