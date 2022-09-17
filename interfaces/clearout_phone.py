@@ -3,7 +3,7 @@ import time
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from openpyxl import Workbook
+import pandas as pd
 import requests
 import os
 
@@ -35,7 +35,7 @@ class ClearoutPhone(QWidget):
         self.clearout_phone_window_height = self.screen_size.height() // 2
 
         self.numbers_file_location = None
-        self.cleaned_emails = None
+        self.cleaned_emails = ["abc1@gmail.com", "abc2@gmail.com", "abc3@gmail.com", "abc4@gmail.com"]
         self.clearout_phone_api = "https://api.clearoutphone.io/v1/phonenumber/validate"
 
         # instance methods
@@ -143,27 +143,17 @@ class ClearoutPhone(QWidget):
             cleaned_numbers_list = eval(number_file.read())
 
         # triggering validate_numbers_with_api method
-        # self.validate_numbers_with_api(payload=cleaned_numbers_list)
+        self.validate_numbers_with_api(payload=cleaned_numbers_list)
 
-        # writing Excel file with email addresses from self.cleaned_emails
-        self.master_workbook = Workbook()
-        self.master_sheet = self.master_workbook.active
-
-        # default/mandatory heading on A1
-        self.master_sheet["A1"] = "Email Addresses"
-
-        column_count = 2
-        row = "A"
-        for email in self.cleaned_emails:
-            self.master_sheet[row + str(column_count)] = email
-            column_count += 1
+        # creating dataframe to store email addresses
+        self.pandas_dataframe = pd.DataFrame({"Email Addresses": self.cleaned_emails})
 
         # save file dialog box
         save_excel_file = QFileDialog.getSaveFileName(self, "Save Excel File", "", "Excel File (*.xlsx)")
         cleaned_save_excel_file_location = save_excel_file[0]
 
-        # saving data into chosen file
-        self.master_workbook.save(filename=cleaned_save_excel_file_location)
+        # saving dataframe into chosen file
+        self.pandas_dataframe.to_excel(cleaned_save_excel_file_location, index=False)
 
         # clearing self.get_numbers_file_location
         self.get_numbers_file_location.clear()
