@@ -46,7 +46,7 @@ class LoginWindow(QWidget):
     def user_interface(self):
         # parent and their respective child layouts
         self.master_layout = QVBoxLayout()
-        self.master_layout.setContentsMargins(10, 60, 10, 10)
+        self.master_layout.setContentsMargins(40, 60, 40, 10)
         self.header_layout = QVBoxLayout()
         self.body_layout = QVBoxLayout()
         self.body_layout.setContentsMargins(40, 10, 40, 10)
